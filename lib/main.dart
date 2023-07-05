@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:pt_manager/screens/splashScreen.dart';
 import 'package:pt_manager/screens/trainee/home.dart';
+import 'package:pt_manager/utilities/theme.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +18,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'hierarchy',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+          useMaterial3: true,
+          colorScheme: lightColorScheme,
+          fontFamily: 'AppleSDGothicNeo'
       ),
+      darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
       home: homePage(),
     );
   }
