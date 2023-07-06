@@ -39,7 +39,11 @@ dependencies:
   carousel_slider: ^4.2.1
   table_calendar: ^3.0.9
   flutter_screenutil: ^5.8.4
-
+  syncfusion_flutter_calendar: ^22.1.37
+  cloud_firestore: ^4.8.2
+  firebase_core: ^2.14.0
+  firebase_auth: ^4.6.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,3 +101,6 @@ flutter:
       fonts: 
         - asset: assets/font/AppleSDGothicNeo/AppleSDGothicNeoB.ttf
           weight: 200
+
+  assets:
+    - assets/

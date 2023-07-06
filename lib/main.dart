@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/screens/splashScreen.dart';
-import 'package:pt_manager/screens/trainee/home.dart';
-import 'package:pt_manager/screens/trainee/schedule.dart';
+import 'package:pt_manager/utilities/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
-
-
-  
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'hierarchy',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: lightColorScheme,
         useMaterial3: true,
       ),
       home: SplashScreen(),
