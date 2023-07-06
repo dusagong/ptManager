@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pt_manager/screens/trainee/p_home.dart';
+import 'package:pt_manager/screens/trainer/t_home.dart';
+
 
 
 class ModeSet extends StatefulWidget {
@@ -289,8 +291,8 @@ class _ModeSetState extends State<ModeSet> {
                 )),
             onTap: () {
               _isClicked == true
-                  ? (Get.offAll(() => homePage()))
-                  : (Get.offAll(() => homePage()));
+                  ? (Get.offAll(() => P_Home()))
+                  : (Get.offAll(() => T_Home()));
             },
           ),
         ],

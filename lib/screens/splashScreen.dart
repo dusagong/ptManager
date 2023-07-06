@@ -26,18 +26,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          color: Theme.of(context).colorScheme.primary,
-          child: Center(
-              child: Text(
-                "Loading..."
-              )
-              ),
-        ),
-        CircularProgressIndicator()
-      ],
+          fit: StackFit.expand,
+          children: [
+            Image.asset(
+              'assets/splashLogo.jpg',
+              fit: BoxFit.cover,
+            ),
+          ],
     ));
   }
 }
