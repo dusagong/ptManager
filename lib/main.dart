@@ -4,6 +4,7 @@ import 'package:pt_manager/screens/splashScreen.dart';
 import 'package:pt_manager/utilities/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
