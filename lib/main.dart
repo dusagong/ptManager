@@ -24,12 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => const homePage()),
-        // GetPage(name: '/second', page: () => const Second()),
-      ],
-      home: Schedule(),
+      home: SplashScreen(),
     );
   }
 }
