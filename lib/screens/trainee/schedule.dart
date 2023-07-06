@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pt_manager/utilities/textStyle.dart';
-import 'home.dart';
+import 'p_home.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 

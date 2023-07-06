@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:pt_manager/screens/trainee/home.dart';
+import 'package:pt_manager/screens/trainee/p_home.dart';
 
 
 class ModeSet extends StatefulWidget {

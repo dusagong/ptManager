@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/screens/splashScreen.dart';
-import 'package:pt_manager/screens/trainee/home.dart';
+import 'package:pt_manager/screens/trainee/p_home.dart';
 import 'package:pt_manager/screens/trainee/schedule.dart';
 
 void main() {
