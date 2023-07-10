@@ -23,8 +23,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.black,
         body: Column(
           children: [
@@ -106,8 +105,7 @@ class _CalendarPageState extends State<CalendarPage> {
           },
           child: const Icon(Icons.add),
         ),
-      ),
-    );
+      );
   }
 
   void _showAddEventDialog(BuildContext context) {

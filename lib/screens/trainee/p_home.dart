@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pt_manager/controller/auth_controller.dart';
+import 'package:pt_manager/screens/modeSetting.dart';
 
 class P_Home extends StatefulWidget {
   const P_Home({Key? key}) : super(key: key);
@@ -119,6 +122,8 @@ class _P_HomeState extends State<P_Home> {
                     ),
                     title: Text('Log Out'),
                     onTap: () {
+                      AuthController.instance.logout();
+                      Get.offAll(() => ModeSet());
                     },
                     trailing: Icon(Icons.arrow_right_alt_outlined),
                   ),

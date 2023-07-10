@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
-import 'package:pt_manager/screens/signup.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignupPage extends StatelessWidget {
+  const SignupPage({Key? key}) : super(key: key);
+  
 
   @override
   Widget build(BuildContext context) {
+
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -18,25 +22,25 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.phone_android,
+                  Icons.card_travel_outlined,
+                  color: Colors.deepPurple,
                   size: 100,
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 Text(
-                  'Hello',
+                  'Sign Up',
                   style: GoogleFonts.bebasNeue(fontSize: 36.0),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  'Welcome back',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                    'Thank you for join us',
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: 28
+                    )
                 ),
                 SizedBox(
                   height: 50,
@@ -52,6 +56,7 @@ class LoginPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: emailController,
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Email'),
                       ),
@@ -71,6 +76,7 @@ class LoginPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Password'),
@@ -83,7 +89,8 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: (){
-                    
+                    AuthController.instance.register(
+                        emailController.text.trim(), passwordController.text.trim());
                   },
                   child: Container(
                     child: Padding(
@@ -91,11 +98,11 @@ class LoginPage extends StatelessWidget {
                       child: Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: Colors.red,
                             borderRadius: BorderRadius.circular(12)),
                         child: Center(
                           child: Text(
-                            'Sign in',
+                            'Sign up',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -112,11 +119,11 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not a member?'),
+                    Text('Already registered?'),
                     GestureDetector(
-                      onTap: ()=> Get.to(()=> SignupPage()),
+                      onTap: () => Get.back(),
                       child: Text(
-                        ' Register Now!',
+                        ' Go back Login page!',
                         style: TextStyle(
                             color: Colors.blue, fontWeight: FontWeight.bold),
                       ),
@@ -131,5 +138,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-

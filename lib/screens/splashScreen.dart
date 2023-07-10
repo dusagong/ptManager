@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pt_manager/screens/logIn.dart';
 import 'package:pt_manager/screens/modeSetting.dart';
 import 'package:pt_manager/screens/trainee/p_home.dart';
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:pt_manager/controller/auth_controller.dart';
+import 'package:pt_manager/screens/logIn.dart';
 import 'package:pt_manager/screens/trainee/p_home.dart';
 import 'package:pt_manager/screens/trainer/t_home.dart';
 
@@ -15,7 +17,7 @@ class ModeSet extends StatefulWidget {
 
 class _ModeSetState extends State<ModeSet> {
   bool _isClicked = false;
-
+  // AuthController authController = AuthController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -291,8 +293,8 @@ class _ModeSetState extends State<ModeSet> {
                 )),
             onTap: () {
               _isClicked == true
-                  ? (Get.offAll(() => P_Home()))
-                  : (Get.offAll(() => T_Home()));
+                  ? Get.offAll(() => LoginPage())
+            : Get.offAll(() => LoginPage());
             },
           ),
         ],

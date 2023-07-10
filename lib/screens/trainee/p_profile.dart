@@ -100,9 +100,9 @@ class _P_ProfileState extends State<P_Profile> {
                   children: [
                     Column(
                       children: [
-                        Text('hi'),
-                        Text('hi'),
-                        Text('hi'),
+                        Text('윤승재'),
+                        Text('hi',),
+                        Text('hello'),
                         Text('hi'),
                         Text('hi'),
                       ],
@@ -113,7 +113,7 @@ class _P_ProfileState extends State<P_Profile> {
                         width: 130,
                         height: 130,
                         decoration: BoxDecoration(
-                          color: Colors.orange,
+                          color: Color(0xFF18F005),
                           shape: BoxShape.circle
                         ),
                       ),
