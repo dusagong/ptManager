@@ -59,11 +59,31 @@ class AuthController extends GetxController {
     }
   }
 
+  void login(String email, password) async {
+    try {
+      await authentication.signInWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {
+      Get.snackbar(
+        "Error message",
+        "User message",
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        titleText: Text(
+          "sigin in is failed",
+          style: TextStyle(color: Colors.white),
+        ),
+        messageText: Text(
+          e.toString(),
+          style: TextStyle(color: Colors.white),
+        ),
+      );
+    }
+  }
+
   void logout() {
     authentication.signOut();
   }
 
-  void login() {
-    // authentication.();
-  }
+  
 }
