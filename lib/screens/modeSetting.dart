@@ -4,9 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/logIn.dart';
 import 'package:pt_manager/screens/trainee/p_home.dart';
+import 'package:pt_manager/screens/trainee/p_onboarding.dart';
 import 'package:pt_manager/screens/trainer/t_home.dart';
-
-
 
 class ModeSet extends StatefulWidget {
   const ModeSet({Key? key}) : super(key: key);
@@ -119,7 +118,7 @@ class _ModeSetState extends State<ModeSet> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                _isClicked = true;
+                                _isClicked = false;
                               });
                             },
                             child: Container(
@@ -200,7 +199,7 @@ class _ModeSetState extends State<ModeSet> {
                             ),
                             onTap: () {
                               setState(() {
-                                _isClicked = false;
+                                _isClicked = true;
                               });
                             },
                           ),
@@ -293,8 +292,16 @@ class _ModeSetState extends State<ModeSet> {
                 )),
             onTap: () {
               _isClicked == true
-                  ? Get.offAll(() => LoginPage())
-            : Get.offAll(() => LoginPage());
+                  ? (
+                      Get.offAll(() => LoginPage()),
+                      AuthController.instance.isTrainer = _isClicked
+                    )
+                  : (
+                      
+                      AuthController.instance.initialized == true ? 
+                      Get.offAll(() => LoginPage()) :Get.offAll(() => OnBoarding()), 
+                      AuthController.instance.isTrainer = _isClicked,
+                    );
             },
           ),
         ],

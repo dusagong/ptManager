@@ -9,6 +9,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -52,6 +55,7 @@ class LoginPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: emailController,
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Email'),
                       ),
@@ -71,6 +75,7 @@ class LoginPage extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Password'),
@@ -83,7 +88,8 @@ class LoginPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: (){
-                    
+                    AuthController.instance.login(
+                        emailController.text.trim(), passwordController.text.trim());
                   },
                   child: Container(
                     child: Padding(

@@ -14,6 +14,7 @@ class AuthController extends GetxController {
   late Rx<User?> _user;
   FirebaseAuth authentication = FirebaseAuth.instance;
   bool initialized = false;
+  late bool isTrainer;
 
   @override
   void onReady() {
@@ -24,10 +25,16 @@ class AuthController extends GetxController {
   }
 
   _moveToPage(User? user) {
-    if (initialized == true && user == null) {
-      Get.offAll(() => LoginPage());
-    } else if (initialized) {
-      Get.offAll(() => P_Home());
+    if (initialized) {
+      if (user == null) {
+        Get.offAll(() => LoginPage());
+      } else {
+        if (isTrainer) {
+          Get.offAll(() => T_Home());
+        } else {
+          Get.offAll(() => P_Home());
+        }
+      }
     } else {
       initialized = true;
     }
@@ -37,10 +44,17 @@ class AuthController extends GetxController {
     try {
       final newUser = await authentication.createUserWithEmailAndPassword(
           email: email, password: password);
-      await FirebaseFirestore.instance
-          .collection('user')
-          .doc(newUser.user!.uid)
-          .set({'userName': _user, 'email': email});
+      if (isTrainer) {
+        await FirebaseFirestore.instance
+            .collection('trainer')
+            .doc(newUser.user!.uid)
+            .set({'email': email});
+      } else {
+        await FirebaseFirestore.instance
+            .collection('trainee')
+            .doc(newUser.user!.uid)
+            .set({'email': email});
+      }
     } catch (e) {
       Get.snackbar(
         "Error message",
@@ -84,6 +98,4 @@ class AuthController extends GetxController {
   void logout() {
     authentication.signOut();
   }
-
-  
 }
