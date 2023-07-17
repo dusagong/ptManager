@@ -13,7 +13,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
   FirebaseAuth authentication = FirebaseAuth.instance;
-  bool initialized = false;
+  bool initialized = true;
   late bool isTrainer;
 
   @override
@@ -24,15 +24,29 @@ class AuthController extends GetxController {
     ever(_user, _moveToPage);
   }
 
-  _moveToPage(User? user) {
+  Future<void> _moveToPage(User? user) async {
     if (initialized) {
       if (user == null) {
         Get.offAll(() => LoginPage());
       } else {
-        if (isTrainer) {
-          Get.offAll(() => T_Home());
-        } else {
-          Get.offAll(() => P_Home());
+        final userId = user.uid;
+        final userSnapshot = await FirebaseFirestore.instance
+            .collection(isTrainer ? 'trainer' : 'trainee')
+            .doc(userId)
+            .get();
+        if (userSnapshot.exists) {
+          final userData = userSnapshot.data();
+          final userRole = userData?['role'];
+
+          if (userRole != null &&
+              userRole == (isTrainer ? true : false)) {
+            if (isTrainer) {
+              Get.offAll(() => T_Home());
+            } else {
+              Get.offAll(() => P_Home());
+            }
+            return;
+          }
         }
       }
     } else {
@@ -44,17 +58,10 @@ class AuthController extends GetxController {
     try {
       final newUser = await authentication.createUserWithEmailAndPassword(
           email: email, password: password);
-      if (isTrainer) {
-        await FirebaseFirestore.instance
-            .collection('trainer')
-            .doc(newUser.user!.uid)
-            .set({'email': email});
-      } else {
-        await FirebaseFirestore.instance
-            .collection('trainee')
-            .doc(newUser.user!.uid)
-            .set({'email': email});
-      }
+      await FirebaseFirestore.instance
+          .collection(isTrainer ? 'trainer' : 'trainee')
+          .doc(newUser.user!.uid)
+          .set({'email': email, 'role': isTrainer});
     } catch (e) {
       Get.snackbar(
         "Error message",

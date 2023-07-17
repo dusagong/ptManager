@@ -15,7 +15,7 @@ class ModeSet extends StatefulWidget {
 }
 
 class _ModeSetState extends State<ModeSet> {
-  bool _isClicked = false;
+  bool _isClicked = true;
   // AuthController authController = AuthController();
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _ModeSetState extends State<ModeSet> {
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _isClicked == true
+                _isClicked == false
                     ? Column(
                         children: [
                           Text(
@@ -151,7 +151,7 @@ class _ModeSetState extends State<ModeSet> {
                           // Image.asset('asset/클릭안된거.png')
                         ],
                       ),
-                _isClicked == true
+                _isClicked == false
                     ? Column(
                         children: [
                           Text(
