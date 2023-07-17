@@ -285,22 +285,6 @@ class _P_HomeState extends State<P_Home> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.text_snippet),
-            label: '나의 판매글',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: '마이페이지',
-          ),
-        ],
-      ),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:pt_manager/screens/trainee/schedule.dart';
 import 'package:pt_manager/screens/trainer/t_calendar.dart';
 import 'package:pt_manager/screens/trainer/t_home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pt_manager/widgets/p_bottomNavigation.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -43,7 +44,7 @@ class AuthController extends GetxController {
             if (isTrainer) {
               Get.offAll(() => T_Home());
             } else {
-              Get.offAll(() => P_Home());
+              Get.offAll(() => P_BottomNavi());
             }
             return;
           }
