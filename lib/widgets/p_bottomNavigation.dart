@@ -31,6 +31,7 @@ class _P_BottomNaviState extends State<P_BottomNavi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
