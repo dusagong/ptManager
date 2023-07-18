@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/logIn.dart';
 import 'package:pt_manager/screens/splashScreen.dart';
-import 'package:pt_manager/screens/trainee/p_food.dart';
 import 'package:pt_manager/utilities/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pt_manager/widgets/p_bottomNavigation.dart';
 
 
 void main() async{
@@ -28,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: darkColorScheme,
         useMaterial3: true,
       ),
-      home: P_BottomNavi(),
+      home: SplashScreen(),
     );
   }
 }
