@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/modeSetting.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class P_Home extends StatefulWidget {
   const P_Home({Key? key}) : super(key: key);
@@ -16,14 +17,14 @@ class _P_HomeState extends State<P_Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        title: const Text('Home Page'),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () {}, icon: const Icon(Icons.calendar_month_outlined))
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Theme.of(context).colorScheme.primary,
+      //   title: const Text('Home Page'),
+      //   actions: <Widget>[
+      //     IconButton(
+      //         onPressed: () {}, icon: const Icon(Icons.calendar_month_outlined))
+      //   ],
+      // ),
       drawer: Drawer(
           backgroundColor: Theme.of(context).colorScheme.background,
           child: ListView(
@@ -129,162 +130,269 @@ class _P_HomeState extends State<P_Home> {
               ),
             ],
           )),
-      body: Center(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
-              child: Text('LoGo',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                      width: 180,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 2),
-                        borderRadius: BorderRadius.circular(20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(style: TextStyle(fontSize: 25), '안녕하세요,승재님!'),
+                          Text('오늘도 최선을 다 해보자구요~'),
+                        ],
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text("운동 변화",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color:
-                                        Theme.of(context).colorScheme.primary)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      )),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child: Container(
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
-                          border: Border.all(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Image.asset('assets/person.png')
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 120,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(24.0, 12.0, 12, 12.0),
+                          margin: EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight,
+                                colors: [
+                                  //이거 색상 매칭 안됨.
+                                  // Color.fromRGBO(0, 102, 255, 100),
+                                  Color.fromARGB(255, 0, 102, 255),
+                                  Color.fromARGB(255, 24, 240, 5),
+                                  // Color.fromRGBO(24, 240, 5, 100),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(16.0)),
+                          child: Row(
                             children: [
-                              SizedBox(
-                                height: 5,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('PT Completed'),
+                                  Text('7/10'),
+                                ],
                               ),
-                              Text("운동 일정",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary)),
                               SizedBox(
-                                height: 10,
+                                width: 20,
                               ),
+                              Image.asset('assets/70%loading.png')
                             ],
                           ),
-                        )),
-                  )
+                        ),
+                      ),
+                      SizedBox(
+                        height: 120,
+                        child: GestureDetector(
+                          onTap: (){
+                            
+                          },
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(12, 12.0, 24.0, 12.0),
+                            margin: EdgeInsets.fromLTRB(6, 12.0, 12.0, 12.0),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topRight,
+                                  colors: [
+                                    Color.fromARGB(255, 0, 74, 143),
+                                    Color.fromARGB(255, 132, 74, 167),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(16.0)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset('assets/desert.png'),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Text(style: TextStyle(fontSize: 8), 'My Story'),
+                                SizedBox(
+                                  height: 1,
+                                ),
+                                Text(style: TextStyle(fontSize: 11), '나의 운동 일지'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    thickness: 1,
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                      style: TextStyle(fontSize: 16), '다음수업에서 계획된 운동을 소개해드릴게요'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      //card horizontal scroll
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(12),
+                          margin: EdgeInsets.all(8),
+                          // color: Colors.black,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.black),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/number1Icon.png'),
+                                Image.asset('assets/oneArmDumbellRow.png'),
+                                Text(
+                                    style: TextStyle(fontSize: 12),
+                                    '원 암 덤벨 로우'),
+                              ]),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(12),
+                          margin: EdgeInsets.all(8),
+                          // color: Colors.black,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.black),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/number1Icon.png'),
+                                Image.asset('assets/oneArmDumbellRow.png'),
+                                Text(
+                                    style: TextStyle(fontSize: 12),
+                                    '원 암 덤벨 로우'),
+                              ]),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(12),
+                          margin: EdgeInsets.all(8),
+                          // color: Colors.black,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.black),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/number1Icon.png'),
+                                Image.asset('assets/oneArmDumbellRow.png'),
+                                Text(
+                                    style: TextStyle(fontSize: 12),
+                                    '원 암 덤벨 로우'),
+                              ]),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    height: 1,
+                  ),
+                  //calendar
+                  SizedBox(
+                    height: 500,
+                    child: SfCalendar(
+                      view: CalendarView.month,
+                      // cellEndPadding: 15,
+                  
+                      dataSource: MeetingDataSource(_getDataSource()),
+                      monthViewSettings: MonthViewSettings(
+                        // appointmentDisplayMode:
+                        //     MonthAppointmentDisplayMode.appointment,
+                        showAgenda: true,
+                        agendaViewHeight: 200,
+                        // agendaItemHeight: 70,
+                        // appointmentDisplayCount: 2
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 100,
+                  //   child: Container(
+                  //     color: Colors.black,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      width: 180,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Text("운동 스케줄",
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color:
-                                        Theme.of(context).colorScheme.primary)),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      )),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                    child: Container(
-                        width: 180,
-                        height: 180,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.background,
-                          border: Border.all(
-                              color: Theme.of(context).colorScheme.primary,
-                              width: 2),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Text("식단",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary)),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          ),
-                        )),
-                  )
-                ],
-              ),
-            )
-          ],
+          ),
         ),
       ),
     );
   }
+
+  List<Meeting> _getDataSource() {
+    final List<Meeting> meetings = <Meeting>[];
+    final DateTime today = DateTime.now();
+    final DateTime startTime =
+        DateTime(today.year, today.month, today.day, 9, 0, 0);
+    final DateTime endTime = startTime.add(const Duration(hours: 2));
+    meetings.add(Meeting(
+        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+    return meetings;
+  }
+}
+
+class MeetingDataSource extends CalendarDataSource {
+  MeetingDataSource(List<Meeting> source) {
+    appointments = source;
+  }
+
+  @override
+  DateTime getStartTime(int index) {
+    return appointments![index].from;
+  }
+
+  @override
+  DateTime getEndTime(int index) {
+    return appointments![index].to;
+  }
+
+  @override
+  String getSubject(int index) {
+    return appointments![index].eventName;
+  }
+
+  @override
+  Color getColor(int index) {
+    return appointments![index].background;
+  }
+
+  @override
+  bool isAllDay(int index) {
+    return appointments![index].isAllDay;
+  }
+}
+
+class Meeting {
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+
+  String eventName;
+  DateTime from;
+  DateTime to;
+  Color background;
+  bool isAllDay;
 }
