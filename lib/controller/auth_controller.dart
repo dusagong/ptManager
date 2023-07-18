@@ -17,6 +17,8 @@ class AuthController extends GetxController {
   bool initialized = true;
   late bool isTrainer;
 
+
+
   @override
   void onReady() {
     super.onReady();
@@ -106,4 +108,14 @@ class AuthController extends GetxController {
   void logout() {
     authentication.signOut();
   }
+
+  bool _islocked = true;
+  bool get islocked => _islocked;
+
+  void toggleLock() {
+    _islocked = !_islocked;
+    update();
+  }
+
+
 }

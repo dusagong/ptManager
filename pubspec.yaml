@@ -44,6 +44,7 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
   google_fonts: ^5.1.0
+  chat_bubbles: ^1.4.1
   
 dev_dependencies:
   flutter_test:
@@ -105,6 +106,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/trainer/
     - assets/food/KakaoTalk_20230713_013044286_01.jpg
     - assets/food/KakaoTalk_20230713_013044286_02.jpg
     - assets/food/KakaoTalk_20230713_013044286_03.jpg
