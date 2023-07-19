@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/modeSetting.dart';
 import 'package:pt_manager/screens/trainee/onboarding/p_onboarding.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import 'package:image_picker/image_picker.dart';
 
 class P_Home extends StatefulWidget {
   const P_Home({Key? key}) : super(key: key);
@@ -14,6 +19,24 @@ class P_Home extends StatefulWidget {
 }
 
 class _P_HomeState extends State<P_Home> {
+  XFile? _image; //이미지를 담을 변수 선언
+  final ImagePicker picker = ImagePicker();
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await picker.pickImage(source: source);
+      if (image == null) {
+        print('ji');
+        return;
+      }
+      setState(() {
+        _image = XFile(image.path);
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,45 +185,50 @@ class _P_HomeState extends State<P_Home> {
                     children: [
                       SizedBox(
                         height: 120,
-                        child: Container(
-                          padding: EdgeInsets.fromLTRB(24.0, 12.0, 12, 12.0),
-                          margin: EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomLeft,
-                                end: Alignment.topRight,
-                                colors: [
-                                  //이거 색상 매칭 안됨.
-                                  // Color.fromRGBO(0, 102, 255, 100),
-                                  Color.fromARGB(255, 0, 102, 255),
-                                  Color.fromARGB(255, 24, 240, 5),
-                                  // Color.fromRGBO(24, 240, 5, 100),
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(16.0)),
-                          child: Row(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('PT Completed'),
-                                  Text('7/10'),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Image.asset('assets/70%loading.png')
-                            ],
+                        child: GestureDetector(
+                          onTap: () {
+                            pickImage(ImageSource.camera);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(24.0, 12.0, 12, 12.0),
+                            margin: EdgeInsets.fromLTRB(12.0, 12.0, 0, 12.0),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topRight,
+                                  colors: [
+                                    //이거 색상 매칭 안됨.
+                                    // Color.fromRGBO(0, 102, 255, 100),
+                                    Color.fromARGB(255, 0, 102, 255),
+                                    Color.fromARGB(255, 24, 240, 5),
+                                    // Color.fromRGBO(24, 240, 5, 100),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(16.0)),
+                            child: Row(
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('PT Completed'),
+                                    Text('7/10'),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Image.asset('assets/70%loading.png')
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
                         height: 120,
                         child: GestureDetector(
-                          onTap: (){
-                            Get.offAll(() => OnBoarding());
+                          onTap: () {
+                            pickImage(ImageSource.gallery);
                           },
                           child: Container(
                             padding: EdgeInsets.fromLTRB(12, 12.0, 24.0, 12.0),
@@ -226,7 +254,8 @@ class _P_HomeState extends State<P_Home> {
                                 SizedBox(
                                   height: 1,
                                 ),
-                                Text(style: TextStyle(fontSize: 11), '나의 운동 일지'),
+                                Text(
+                                    style: TextStyle(fontSize: 11), '나의 운동 일지'),
                               ],
                             ),
                           ),
@@ -318,7 +347,7 @@ class _P_HomeState extends State<P_Home> {
                     child: SfCalendar(
                       view: CalendarView.month,
                       // cellEndPadding: 15,
-                  
+
                       dataSource: MeetingDataSource(_getDataSource()),
                       monthViewSettings: MonthViewSettings(
                         // appointmentDisplayMode:
