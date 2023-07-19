@@ -91,7 +91,7 @@ class AuthController extends GetxController {
       Get.snackbar(
         "Error message",
         "User message",
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.blue,
         snackPosition: SnackPosition.BOTTOM,
         titleText: Text(
           "sigin in is failed",
