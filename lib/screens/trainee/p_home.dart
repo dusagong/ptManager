@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/modeSetting.dart';
+import 'package:pt_manager/screens/trainee/onboarding/p_onboarding.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -226,9 +227,9 @@ class _P_HomeState extends State<P_Home> {
                       SizedBox(
                         height: 120,
                         child: GestureDetector(
+
                           onTap: () {
-                            pickImage(ImageSource.gallery);
-                          },
+                            pickImage(ImageSource.gallery);         
                           child: Container(
                             padding: EdgeInsets.fromLTRB(12, 12.0, 24.0, 12.0),
                             margin: EdgeInsets.fromLTRB(6, 12.0, 12.0, 12.0),

@@ -108,6 +108,7 @@ flutter:
   assets:
     - assets/
     - assets/trainer/
+    - assets/onboarding/
     - assets/food/KakaoTalk_20230713_013044286_01.jpg
     - assets/food/KakaoTalk_20230713_013044286_02.jpg
     - assets/food/KakaoTalk_20230713_013044286_03.jpg
