@@ -11,6 +11,9 @@ class P_Food extends StatefulWidget {
 }
 
 class _P_FoodState extends State<P_Food> {
+  final _DateController = TextEditingController();
+  final _MenuController = TextEditingController();
+  final _DesController = TextEditingController();
 
   List<Map<String, dynamic>> foodData = [
     {
@@ -54,7 +57,7 @@ class _P_FoodState extends State<P_Food> {
           title: Text("식단"),
           actions: <Widget>[
             IconButton(onPressed: (){}, icon: const Icon(Icons.notifications_outlined)),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.add))
+            IconButton(onPressed: (){_addFoodBottomSheet();}, icon: Icon(Icons.add))
           ],
         ),
 
@@ -204,6 +207,112 @@ class _P_FoodState extends State<P_Food> {
                                     ],
                                   ),
                                 )
+                              ],
+                            ),
+                          )
+
+                        ],
+                      )
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+  void _addFoodBottomSheet() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.75,
+          width: 340,
+          //color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Stack(
+                alignment: Alignment.bottomCenter,
+                //overflow: Overflow.visible,
+                children: [
+                  Container(
+                      width: 340,
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      )
+                  ),
+                  Transform.translate(
+                      offset: Offset(0, -130),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Image.asset(
+                              "assets/food/blank.png",
+                              fit: BoxFit.cover,
+                              width: 300,
+                              height: 310,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 13, 20, 0),
+                                      child: Text("date", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          //AuthController.instance.toggleLock(); // Call the toggleLock function from the AuthController to update the icon
+                                        },
+                                        icon: Icon(Icons.lock_open_sharp, color: Colors.black)
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 3, 20, 0),
+                                  child: TextField(
+                                    controller: _MenuController,
+                                    decoration: const InputDecoration(
+                                      labelText: '오늘 먹은 음식을 기록해주세요!',
+                                      labelStyle: TextStyle(
+                                        fontSize: 15,
+                                        //fontWeight: FontWeight.bold,
+                                      ),
+                                      border: InputBorder.none,
+
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 11, 20, 0),
+                                  child: TextField(
+                                    controller: _DesController,
+                                    decoration: const InputDecoration(
+                                      labelText: '오늘 하루는 어땠나요?',
+                                      labelStyle: TextStyle(
+                                        fontSize: 15,
+                                        ),
+                                      border: InputBorder.none,
+                                    ),
+
+                                  ),
+                                ),
                               ],
                             ),
                           )
