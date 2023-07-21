@@ -46,6 +46,7 @@ dependencies:
   google_fonts: ^5.1.0
   chat_bubbles: ^1.4.1
   image_picker: ^1.0.1
+  syncfusion_flutter_charts: ^22.1.39
   
 dev_dependencies:
   flutter_test:
