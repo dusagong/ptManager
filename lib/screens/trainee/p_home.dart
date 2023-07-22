@@ -11,6 +11,8 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import 'ChangeSchedule/SelectDay.dart';
+
 class P_Home extends StatefulWidget {
   const P_Home({Key? key}) : super(key: key);
 
@@ -228,7 +230,8 @@ class _P_HomeState extends State<P_Home> {
                         height: 120,
                         child: GestureDetector(
                           onTap: () {
-                            pickImage(ImageSource.gallery);
+                            Get.to(() => OnBoarding());
+                            //pickImage(ImageSource.gallery);
                           },
                           child: Container(
                             padding: EdgeInsets.fromLTRB(12, 12.0, 24.0, 12.0),
@@ -365,6 +368,29 @@ class _P_HomeState extends State<P_Home> {
                   //     color: Colors.black,
                   //   ),
                   // ),
+                  GestureDetector(
+                      onTap: (){
+                        //Get.back();
+                        Get.to(() => SelectDay());
+                      },
+                      child: new Container(
+                        width: 159,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF252932),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: new Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              new Text(
+                                "일정 변경",
+                                style: TextStyle(fontSize: 18, color: Color(0xFF9C9C9C)),
+                              ),
+                            ]
+                        ),
+                      )
+                  ),
                 ],
               ),
             ),
