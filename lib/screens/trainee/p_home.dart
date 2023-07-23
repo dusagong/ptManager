@@ -11,6 +11,8 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import 'package:firebase_storage/firebase_storage.dart';
+
 class P_Home extends StatefulWidget {
   const P_Home({Key? key}) : super(key: key);
 
@@ -36,6 +38,12 @@ class _P_HomeState extends State<P_Home> {
       print('Failed to pick image: $e');
     }
   }
+  // //getting reference to storage root!!!
+  // Reference referenceRoot = FirebaseStorage.instance.ref();
+  // Reference referenceDirImages = referenceRoot.child('images');
+  
+  // //Create a reference for the image to be stored
+  // Reference referenceImageToUpload = referenceDirImages.child('${}');
 
   @override
   Widget build(BuildContext context) {
