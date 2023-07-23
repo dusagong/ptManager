@@ -47,6 +47,7 @@ dependencies:
   chat_bubbles: ^1.4.1
   image_picker: ^1.0.1
   firebase_storage: ^11.2.5
+  syncfusion_flutter_charts: ^22.1.39
   
 dev_dependencies:
   flutter_test:
@@ -110,14 +111,4 @@ flutter:
     - assets/
     - assets/trainer/
     - assets/onboarding/
-    - assets/food/KakaoTalk_20230713_013044286_01.jpg
-    - assets/food/KakaoTalk_20230713_013044286_02.jpg
-    - assets/food/KakaoTalk_20230713_013044286_03.jpg
-    - assets/food/KakaoTalk_20230713_013044286_04.jpg
-    - assets/food/KakaoTalk_20230713_013044286_05.jpg
-    - assets/food/KakaoTalk_20230713_013044286_06.jpg
-    - assets/food/KakaoTalk_20230713_013044286_07.jpg
-    - assets/food/KakaoTalk_20230713_013044286_08.jpg
-    - assets/food/KakaoTalk_20230713_013044286_09.jpg
-    - assets/food/KakaoTalk_20230713_013044286_10.jpg
-    - assets/food/KakaoTalk_20230713_013044286_11.jpg
+    - assets/food/

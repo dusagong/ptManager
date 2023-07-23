@@ -41,80 +41,77 @@ class _OnBoardingState extends State<OnBoarding> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: PageView.builder(
-                controller: _pageController, // PageController 연결
-                onPageChanged: (value) {
-                  setState(() {
-                    currentPage = value;
-                  });
-                },
-                itemCount: splashData.length,
-                itemBuilder: (context, index) => SplashContent(
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 3,
+            child: PageView.builder(
+              controller: _pageController, // PageController 연결
+              onPageChanged: (value) {
+                setState(() {
+                  currentPage = value;
+                });
+              },
+              itemCount: splashData.length,
+              itemBuilder: (context, index) => SplashContent(
                   image: splashData[index]["image"],
                   text: splashData[index]['text'],
                   des: splashData[index]['des']
-                ),
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        splashData.length, (index) => buildDot(index: index),
-                      ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      splashData.length, (index) => buildDot(index: index),
                     ),
-                    Spacer(flex: 3),
-                    GestureDetector(
-                        onTap: (){
-                          if (currentPage < splashData.length - 1) { // 마지막 페이지가 아닌 경우에만 다음 페이지로 이동
-                            _pageController.nextPage(
-                              duration: Duration(milliseconds: 300), // 페이지 전환 애니메이션 지속 시간
-                              curve: Curves.easeInOut, // 페이지 전환 애니메이션 곡선
-                            );
-                          }
-                          else
-                            {
-                              Get.offAll(() => Started());
-                            }
-                        },
-                        child: new Container(
-                          width: 326,
-                          height: 87,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF18F005),
-                            borderRadius: BorderRadius.circular(16),
-                            ),
-                          child: new Column(
+                  ),
+                  Spacer(flex: 3),
+                  GestureDetector(
+                      onTap: (){
+                        if (currentPage < splashData.length - 1) { // 마지막 페이지가 아닌 경우에만 다음 페이지로 이동
+                          _pageController.nextPage(
+                            duration: Duration(milliseconds: 300), // 페이지 전환 애니메이션 지속 시간
+                            curve: Curves.easeInOut, // 페이지 전환 애니메이션 곡선
+                          );
+                        }
+                        else
+                        {
+                          Get.to(() => Started());
+                        }
+                      },
+                      child: new Container(
+                        width: 326,
+                        height: 87,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF18F005),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: new Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                new Text(
-                                    "다음",
-                                  style: TextStyle(fontSize: 18, color: Colors.white),
-                                ),
-                              ]
-                          ),
-                        )
-                    ),
-                    Spacer(),
-                  ],
-                ),
+                            children: [
+                              new Text(
+                                "다음",
+                                style: TextStyle(fontSize: 18, color: Colors.white),
+                              ),
+                            ]
+                        ),
+                      )
+                  ),
+                  Spacer(),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ) ;
   }
 
   AnimatedContainer buildDot({int? index}) {
