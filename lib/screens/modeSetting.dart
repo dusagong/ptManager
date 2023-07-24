@@ -21,6 +21,7 @@ class _ModeSetState extends State<ModeSet> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
             height: 75,
@@ -43,9 +44,9 @@ class _ModeSetState extends State<ModeSet> {
             height: 60,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _isClicked == false
                     ? Column(
@@ -54,14 +55,13 @@ class _ModeSetState extends State<ModeSet> {
                             '회원',
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Color.fromARGB(255, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '회원이에요',
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Color.fromARGB(160, 0, 0, 0)),
+                                ),
                           ),
                           SizedBox(
                             height: 10,
@@ -102,14 +102,12 @@ class _ModeSetState extends State<ModeSet> {
                             '회원',
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Color.fromARGB(80, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '회원이에요',
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Color.fromARGB(40, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -158,14 +156,12 @@ class _ModeSetState extends State<ModeSet> {
                             '트레이너',
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Color.fromARGB(80, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '맞춤형 훈련을 제공해요',
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Color.fromARGB(40, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -213,14 +209,12 @@ class _ModeSetState extends State<ModeSet> {
                             '트레이너',
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Color.fromARGB(255, 0, 0, 0),
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '맞춤형 훈련을 제공해요',
                             style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(160, 0, 0, 0)),
+                                fontSize: 16),
                           ),
                           SizedBox(
                             height: 10,
@@ -297,9 +291,9 @@ class _ModeSetState extends State<ModeSet> {
                       AuthController.instance.isTrainer = _isClicked
                     )
                   : (
-                      
-                      AuthController.instance.initialized == true ? 
-                      Get.offAll(() => LoginPage()) :Get.offAll(() => OnBoarding()), 
+
+                      AuthController.instance.initialized == true ?
+                      Get.offAll(() => LoginPage()) :Get.offAll(() => OnBoarding()),
                       AuthController.instance.isTrainer = _isClicked,
                     );
             },
