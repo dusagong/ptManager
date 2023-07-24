@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +7,6 @@ import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/modeSetting.dart';
 import 'package:pt_manager/screens/trainee/onboarding/p_onboarding.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'ChangeSchedule/SelectDay.dart';
