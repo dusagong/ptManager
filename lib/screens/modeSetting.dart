@@ -75,15 +75,6 @@ class _ModeSetState extends State<ModeSet> {
                               ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 0,
-                                  blurRadius: 8,
-                                  offset: Offset(
-                                      2, 0), // changes position of shadow
-                                ),
-                              ],
                               // image: DecorationImage(
                               //   image: ExactAssetImage('asset/농부.png'),
                               //   // fit: BoxFit.fitHeight,
@@ -108,7 +99,7 @@ class _ModeSetState extends State<ModeSet> {
                             '회원이에요',
                             style: TextStyle(
                                 fontSize: 16,
-                                fontWeight: FontWeight.bold),
+                                ),
                           ),
                           SizedBox(
                             height: 10,
@@ -122,27 +113,15 @@ class _ModeSetState extends State<ModeSet> {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 255, 255, 255),
-                                border: Border.all(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 0,
-                                    blurRadius: 10,
-                                    offset: Offset(
-                                        2, 0), // changes position of shadow
-                                  ),
-                                ],
                                 // image: DecorationImage(
                                 //   image: ExactAssetImage('asset/농부.png'),
                                 //   // fit: BoxFit.fitHeight,
                                 // ),
                               ),
-                              height: 249,
-                              width: 179,
+                              height: 245,
+                              width: 175,
                             ),
                           ),
                           SizedBox(height: 30),
@@ -161,8 +140,7 @@ class _ModeSetState extends State<ModeSet> {
                           Text(
                             '맞춤형 훈련을 제공해요',
                             style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 16,),
                           ),
                           SizedBox(
                             height: 10,
@@ -171,20 +149,8 @@ class _ModeSetState extends State<ModeSet> {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Color.fromARGB(255, 255, 255, 255),
-                                border: Border.all(
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 0,
-                                    blurRadius: 10,
-                                    offset: Offset(
-                                        2, 0), // changes position of shadow
-                                  ),
-                                ],
                                 // image: DecorationImage(
                                 //   image: ExactAssetImage('asset/자영업ㅈ.png'),
                                 //   // fit: BoxFit.fitHeight,
@@ -228,22 +194,13 @@ class _ModeSetState extends State<ModeSet> {
                               ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 0,
-                                  blurRadius: 8,
-                                  offset: Offset(
-                                      2, 0), // changes position of shadow
-                                ),
-                              ],
                               // image: DecorationImage(
                               //   image: ExactAssetImage('asset/자영업ㅈ.png'),
                               //   // fit: BoxFit.fitHeight,
                               // ),
                             ),
-                            height: 249,
-                            width: 179,
+                            height: 245,
+                            width: 175,
                           ),
                           SizedBox(height: 30),
                           // Image.asset('asset/클릭된거.png')
