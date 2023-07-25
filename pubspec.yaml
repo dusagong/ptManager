@@ -48,6 +48,7 @@ dependencies:
   image_picker: ^1.0.1
   firebase_storage: ^11.2.5
   syncfusion_flutter_charts: ^22.1.39
+  flutter_native_splash: ^2.3.1
   
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,8 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_native_splash:
+  background_image: assets/splashLogo.jpg
 flutter:
 
   # The following line ensures that the Material Icons font is

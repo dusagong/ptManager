@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/logIn.dart';
+import 'package:pt_manager/screens/modeSetting.dart';
 import 'package:pt_manager/screens/splashScreen.dart';
 import 'package:pt_manager/utilities/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: darkColorScheme,
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: ModeSet(),
     );
   }
 }
