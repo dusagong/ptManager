@@ -6,6 +6,7 @@ import 'package:pt_manager/screens/modeSetting.dart';
 import 'package:pt_manager/screens/splashScreen.dart';
 import 'package:pt_manager/utilities/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pt_manager/widgets/p_bottomNavigation.dart';
 
 
 void main() async{
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ModeSet(),
+      // home: P_BottomNavi(),
     );
   }
 }

@@ -17,7 +17,7 @@ class AuthController extends GetxController {
   bool initialized = true;
   late bool isTrainer;
 
-
+  Rx<User?> get getUser => _user;
 
   @override
   void onReady() {

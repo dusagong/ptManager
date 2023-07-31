@@ -1,14 +1,12 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/modeSetting.dart';
 import 'package:pt_manager/screens/trainee/onboarding/p_onboarding.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'ChangeSchedule/SelectDay.dart';
 
 class P_Home extends StatefulWidget {
@@ -19,23 +17,7 @@ class P_Home extends StatefulWidget {
 }
 
 class _P_HomeState extends State<P_Home> {
-  XFile? _image; //이미지를 담을 변수 선언
-  final ImagePicker picker = ImagePicker();
-
-  Future pickImage(ImageSource source) async {
-    try {
-      final XFile? image = await picker.pickImage(source: source);
-      if (image == null) {
-        print('ji');
-        return;
-      }
-      setState(() {
-        _image = XFile(image.path);
-      });
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
+  
   // //getting reference to storage root!!!
   // Reference referenceRoot = FirebaseStorage.instance.ref();
   // Reference referenceDirImages = referenceRoot.child('images');
@@ -193,7 +175,7 @@ class _P_HomeState extends State<P_Home> {
                         height: 120,
                         child: GestureDetector(
                           onTap: () {
-                            pickImage(ImageSource.camera);
+                            // pickImage(ImageSource.camera);
                           },
                           child: Container(
                             padding: EdgeInsets.fromLTRB(24.0, 12.0, 12, 12.0),
