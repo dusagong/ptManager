@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pt_manager/screens/trainer/t_home.dart';
 import 'package:pt_manager/screens/trainer/t_pList.dart';
 
 
@@ -13,7 +14,7 @@ class T_BottomNaviState extends State<T_BottomNavi> {
   int _selectedIndex = 0;
   
   final List<Widget> _widgetOptions = <Widget>[
-    T_Plist(),
+    T_Home(),
     T_Plist(),
     T_Plist(),
     T_Plist(),
