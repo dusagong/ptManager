@@ -9,6 +9,7 @@ import 'package:pt_manager/screens/trainer/t_calendar.dart';
 import 'package:pt_manager/screens/trainer/t_home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pt_manager/widgets/p_bottomNavigation.dart';
+import 'package:pt_manager/widgets/t_bottomNavigation.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -44,7 +45,7 @@ class AuthController extends GetxController {
           if (userRole != null &&
               userRole == (isTrainer ? true : false)) {
             if (isTrainer) {
-              Get.offAll(() => T_Home());
+              Get.offAll(() => T_BottomNavi());
             } else {
               Get.offAll(() => P_BottomNavi());
             }
@@ -64,7 +65,7 @@ class AuthController extends GetxController {
       await FirebaseFirestore.instance
           .collection(isTrainer ? 'trainer' : 'trainee')
           .doc(newUser.user!.uid)
-          .set({'email': email, 'role': isTrainer});
+          .set({'email': email, 'role': isTrainer, 'userCount': 0});
     } catch (e) {
       Get.snackbar(
         "Error message",
