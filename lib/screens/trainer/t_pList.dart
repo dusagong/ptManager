@@ -50,8 +50,7 @@ class _T_PlistState extends State<T_Plist> {
                 itemBuilder: (context, index) {
                   var traineeData = snapshot.data?[index].data();
                   return ListTile(
-                    title: Text(traineeData!['name']),
-                    subtitle: Text(traineeData['email']),
+                    title: Text(traineeData!['email']),
                     // Customize the list tile as needed.
                   );
                 },
@@ -71,7 +70,7 @@ Future<List<DocumentSnapshot<Map<String, dynamic>>>>
 
   // Replace 'Trainer' with the actual name of the Trainer collection.
   DocumentReference<Map<String, dynamic>> trainerDocRef =
-      FirebaseFirestore.instance.collection('Trainer').doc(loggedInUid);
+      FirebaseFirestore.instance.collection('trainer').doc(loggedInUid);
 
   // Get the document snapshot of the logged-in Trainer.
   DocumentSnapshot<Map<String, dynamic>> trainerDocSnapshot =
