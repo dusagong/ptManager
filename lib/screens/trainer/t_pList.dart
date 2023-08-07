@@ -27,7 +27,10 @@ class _T_PlistState extends State<T_Plist> {
         title: Text('회원'),
         centerTitle: true,
         elevation: 0,
-        actions: [Icon(Icons.search)],
+        //leading: ,
+        actions: <Widget>[
+          IconButton(onPressed: (){}, icon: Icon(Icons.add))
+        ],
       ),
       body: FutureBuilder<List<DocumentSnapshot<Map<String, dynamic>>>>(
         future: traineeDocuments,
@@ -39,22 +42,69 @@ class _T_PlistState extends State<T_Plist> {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Text('No trainees found.');
           } else {
-            return Container(
-              height: 400,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
+            return Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: Container(
+                height: 400,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.transparent),
+                ),
+                child: Scrollbar(
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        var traineeData = snapshot.data?[index].data();
+                        return Padding(
+                          padding: EdgeInsets.fromLTRB(32, 10, 32, 0),
+                          child: GestureDetector(
+                            onTap: (){},
+                            child: Container(
+                                height: 72,
+                                width: 250,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          child: CircleAvatar(
+                                            radius: 27,
+                                            backgroundImage: AssetImage('assets/trainer/profile.jpg'),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                          child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  traineeData!['email'],
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                              ]
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 10,
+                                    )
+                                  ],
+                                )
+                            ),
+                          )
+                        );
+                      },
+                    )),
               ),
-              child: Scrollbar(
-                  child: ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  var traineeData = snapshot.data?[index].data();
-                  return ListTile(
-                    title: Text(traineeData!['email']),
-                    // Customize the list tile as needed.
-                  );
-                },
-              )),
             );
           }
         },
@@ -62,7 +112,7 @@ class _T_PlistState extends State<T_Plist> {
     );
   }
 }
-
+//traineeData!['email']
 Future<List<DocumentSnapshot<Map<String, dynamic>>>>
     getTraineeDocuments() async {
   // Get the currently logged-in user's UID.
