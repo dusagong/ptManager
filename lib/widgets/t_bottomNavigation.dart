@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pt_manager/screens/trainer/t_pList.dart';
 
+import '../screens/trainer/t_home.dart';
+
 
 class T_BottomNavi extends StatefulWidget {
   const T_BottomNavi({super.key});
@@ -13,8 +15,7 @@ class T_BottomNaviState extends State<T_BottomNavi> {
   int _selectedIndex = 0;
   
   final List<Widget> _widgetOptions = <Widget>[
-    T_Plist(),
-    T_Plist(),
+    T_Home(),
     T_Plist(),
     T_Plist(),
   ];
@@ -36,8 +37,8 @@ class T_BottomNaviState extends State<T_BottomNavi> {
             label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '채팅',
+            icon: Icon(Icons.people_outline),
+            label: '회원',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
