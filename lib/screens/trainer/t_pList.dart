@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
+import 'package:pt_manager/controller/traineeController.dart';
 
 class T_Plist extends StatefulWidget {
   const T_Plist({super.key});
@@ -13,6 +15,7 @@ class T_Plist extends StatefulWidget {
 
 class _T_PlistState extends State<T_Plist> {
   late Future<List<DocumentSnapshot<Map<String, dynamic>>>> traineeDocuments;
+    final TraineeController traineeController = Get.put(TraineeController());
 
   @override
   void initState() {
@@ -29,7 +32,9 @@ class _T_PlistState extends State<T_Plist> {
         elevation: 0,
         //leading: ,
         actions: <Widget>[
-          IconButton(onPressed: (){}, icon: Icon(Icons.add))
+          IconButton(onPressed: (){
+            showAddTraineeDialog();
+          }, icon: Icon(Icons.add))
         ],
       ),
       body: FutureBuilder<List<DocumentSnapshot<Map<String, dynamic>>>>(
@@ -111,7 +116,37 @@ class _T_PlistState extends State<T_Plist> {
       ),
     );
   }
+  void showAddTraineeDialog() {
+      TextEditingController newTraineeController = TextEditingController(); // Create a new controller
+
+    Get.defaultDialog(
+      title: 'Add Trainee',
+      content: TextField(
+        controller: newTraineeController,
+        decoration: InputDecoration(hintText: 'Enter trainee document name'),
+      ),
+      confirm: ElevatedButton(
+        onPressed: () async {
+          String traineeDocumentName =
+              newTraineeController.text;
+          bool documentExists =
+              await traineeController.checkTraineeDocumentExists(
+                  traineeDocumentName);
+
+          if (documentExists) {
+            traineeController.addTraineeToUserMapping(traineeDocumentName);
+          } else {
+            // Handle document not found
+          }
+
+          Get.back(); // Close the dialog
+        },
+        child: Text('Add'),
+      ),
+    );
+  }
 }
+
 //traineeData!['email']
 Future<List<DocumentSnapshot<Map<String, dynamic>>>>
     getTraineeDocuments() async {
