@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
+import 'package:pt_manager/screens/trainer/t_personalPage.dart';
 
 class T_Plist extends StatefulWidget {
   const T_Plist({super.key});
@@ -54,10 +57,13 @@ class _T_PlistState extends State<T_Plist> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         var traineeData = snapshot.data?[index].data();
+                        var documentName = snapshot.data?[index].id;
                         return Padding(
                           padding: EdgeInsets.fromLTRB(32, 10, 32, 0),
                           child: GestureDetector(
-                            onTap: (){},
+                            onTap: (){
+                              Get.to(() => T_PersonalPage(documentName));
+                            },
                             child: Container(
                                 height: 72,
                                 width: 250,
@@ -80,13 +86,16 @@ class _T_PlistState extends State<T_Plist> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  traineeData!['email'],
+                                                  documentName!,
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 14,
                                                       fontWeight: FontWeight.bold
                                                   ),
                                                 ),
+                                                Text(
+                                                  "나이, 키/몸무게, 회차"
+                                                )
                                               ]
                                           ),
                                         ),
