@@ -67,7 +67,7 @@ class _T_PlistState extends State<T_Plist> {
                           padding: EdgeInsets.fromLTRB(32, 10, 32, 0),
                           child: GestureDetector(
                             onTap: (){
-                              Get.to(() => T_PersonalPage(documentName));
+                              Get.to(() => T_PersonalPage(documentName!));
                             },
                             child: Container(
                                 height: 72,
@@ -91,7 +91,8 @@ class _T_PlistState extends State<T_Plist> {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  documentName!,
+                                                  // documentName!,
+                                                  traineeData!['email'],
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 14,
