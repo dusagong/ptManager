@@ -184,7 +184,8 @@ class _P_FoodState extends State<P_Food> {
               ],
             );
           },
-        ));
+        )
+    );
   }
 
   void _showBottomSheet(BuildContext context, String imageUrl, String date) {
