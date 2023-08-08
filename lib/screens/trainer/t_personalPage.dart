@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:pt_manager/screens/trainer/t_personalchangePage.dart';
+import 'package:pt_manager/screens/trainer/t_personalfoodPage.dart';
 
 class T_PersonalPage extends StatefulWidget {
   final String documentName;
@@ -13,6 +15,7 @@ class T_PersonalPage extends StatefulWidget {
 }
 
 class _T_PersonalPageState extends State<T_PersonalPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,15 +84,11 @@ class _T_PersonalPageState extends State<T_PersonalPage> {
                         Tab(text: "메모"),
                       ],
                     ),
-                    Flexible(
+                    Expanded(
                       child: TabBarView(
                         children: [
-                          SingleChildScrollView(
-                            child: Center(child: Text("식단 페이지")),
-                          ),
-                          SingleChildScrollView(
-                            child: Center(child: Text("변화량 페이지")),
-                          ),
+                          Tab(child: T_PersonalFood(),),
+                          Tab(child: T_PersonalChange(),),
                           SingleChildScrollView(
                             child: Center(child: Text("캘린더 페이지")),
                           ),
