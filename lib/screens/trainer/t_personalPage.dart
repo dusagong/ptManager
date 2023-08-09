@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pt_manager/screens/trainer/t_personalchangePage.dart';
 import 'package:pt_manager/screens/trainer/t_personalfoodPage.dart';
+import 'package:pt_manager/screens/trainer/t_personalmemoPage.dart';
 
 class T_PersonalPage extends StatefulWidget {
   final String documentName;
@@ -92,9 +93,8 @@ class _T_PersonalPageState extends State<T_PersonalPage> {
                           SingleChildScrollView(
                             child: Center(child: Text("캘린더 페이지")),
                           ),
-                          SingleChildScrollView(
-                            child: Center(child: Text("메모 페이지")),
-                          ),
+                          Tab(child: T_PersonalMemo(widget.documentName),),
+
                         ],
                       ),
                     ),
