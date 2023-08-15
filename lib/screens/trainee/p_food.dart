@@ -10,6 +10,8 @@ import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
+import 'package:pt_manager/controller/traineeController.dart';
 
 class P_Food extends StatefulWidget {
   const P_Food({Key? key}) : super(key: key);
@@ -19,17 +21,30 @@ class P_Food extends StatefulWidget {
 }
 
 class _P_FoodState extends State<P_Food> {
+  final TraineeController traineeController = Get.put(TraineeController());
+  User? currentUser;
+  @override
+  void initState() {
+    super.initState();
+    AuthController authController = AuthController.instance;
+    currentUser = authController.getUser.value;
+  }
+
   String imageUrl = '';
   String uniqueFileName = '';
+  String formattedDate = '';
   Reference? referenceRoot;
   Reference? referenceDirImages;
   Reference? referenceImageToUpload;
   XFile? file;
+  DateTime now = DateTime.now();
+
   Future pickImage(ImageSource source) async {
     ImagePicker imagePicker = ImagePicker();
     // setState(() async {});
     file = await imagePicker.pickImage(source: source);
-    uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    // Extract year, month, and day from the DateTime object
+    uniqueFileName = now.millisecondsSinceEpoch.toString();
 
     referenceRoot = FirebaseStorage.instance.ref();
     referenceDirImages = referenceRoot!.child('food');
@@ -44,41 +59,6 @@ class _P_FoodState extends State<P_Food> {
     } catch (error) {}
   }
 
-  // XFile? _image; //이미지를 담을 변수 선언
-  // final ImagePicker picker = ImagePicker();
-
-  // String? imageUrl;
-  // Future pickImage(ImageSource source) async {
-  //   try {
-  //     final XFile? image = await picker.pickImage(source: source);
-  //     if (image == null) {
-  //       print('ji');
-  //       return;
-  //     }
-  //     setState(() {
-  //       _image = XFile(image.path);
-  //       print('${_image!.name}');
-  //       print('pathhhhh');
-  //     });
-  //   } on PlatformException catch (e) {
-  //     print('Failed to pick image: $e');
-  //   }
-  // }
-
-  // Future uploadImage() async {
-  //   try {
-  //     final path = 'foodImages/${_image!.name}';
-  //     final file = File(_image!.path);
-
-  //     final ref = FirebaseStorage.instance.ref().child(path);
-  //     ref.putFile(file);
-  //     imageUrl = await ref.getDownloadURL();
-  //   } on Exception catch (e) {
-  //     print('error!!!!!!!!!!!!!\n$e');
-  //   }
-  // }
-
-  // final _DateController = TextEditingController();
   final _MenuController = TextEditingController();
   final _DesController = TextEditingController();
   String? menuText;
@@ -138,57 +118,100 @@ class _P_FoodState extends State<P_Food> {
                 icon: Icon(Icons.add))
           ],
         ),
-        body: ListView.builder(
-          itemCount: foodData.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                ListTile(
-                  title: Text(
-                    foodData[index]["date"],
-                    style: TextStyle(fontSize: 13),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: foodData[index]["images"].length,
-                      itemBuilder: (context, imgIndex) {
-                        return GestureDetector(
-                          onTap: () {
-                            _showBottomSheet(
-                                context,
-                                foodData[index]["images"][imgIndex],
-                                foodData[index]["date"]);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: Image.asset(
-                                foodData[index]["images"][imgIndex],
-                                width: 120,
-                                height: 120,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+        body: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('trainee')
+              .doc(currentUser?.uid)
+              .collection('Food')
+              // .orderBy('date',
+              //     descending:
+              //         true) // Order documents by date in descending order
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            List<QueryDocumentSnapshot<Map<String, dynamic>>> foodDocs =
+                snapshot.data!.docs
+                    as List<QueryDocumentSnapshot<Map<String, dynamic>>>;
+
+            return ListView.builder(
+              itemCount: foodDocs.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
+                    foodDocs[index];
+                Map<String, dynamic> foodData = foodDocSnapshot.data() ?? {};
+
+                return Column(
+                  children: [
+                    ListTile(
+                      title: Text(
+                        foodDocSnapshot.id, // Date as the document ID
+                        style: TextStyle(fontSize: 13),
+                      ),
                     ),
-                  ),
-                )
-              ],
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: SizedBox(
+                        height: 120,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              (foodData['mappings'] as Map<String, dynamic>?)
+                                      ?.length ??
+                                  0,
+                          itemBuilder: (context, imgIndex) {
+                            String mappingName = 'number${imgIndex + 1}';
+                            Map<String, dynamic> mappingData = (foodData[
+                                        'mappings']
+                                    as Map<String, dynamic>?)?[mappingName] ??
+                                {};
+
+                            return GestureDetector(
+                              onTap: () {
+                                _showBottomSheet(
+                                  context,
+                                  mappingData['foodImage'],
+                                  foodDocSnapshot.id,
+                                  mappingData['menu'],
+                                  mappingData['memo'],
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                    // foodData[index]["images"][imgIndex],
+                                    mappingData['foodImage'],
+                                    width: 120,
+                                    height: 120,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              },
             );
           },
         )
-    );
+
+        //
+        );
   }
 
-  void _showBottomSheet(BuildContext context, String imageUrl, String date) {
+  void _showBottomSheet(BuildContext context, String imageUrl, String date, String menu, String memo) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -222,7 +245,7 @@ class _P_FoodState extends State<P_Food> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(30),
-                            child: Image.asset(
+                            child: Image.network(
                               imageUrl,
                               fit: BoxFit.cover,
                               width: 300,
@@ -260,7 +283,7 @@ class _P_FoodState extends State<P_Food> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 3, 20, 0),
                                   child: Text(
-                                    "점심: 아보카도, 양배추, 블루베리, 닭가슴살",
+                                    menu,
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -270,7 +293,7 @@ class _P_FoodState extends State<P_Food> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 11, 20, 0),
                                   child: Text(
-                                    "아 오늘은 아침부터 너무 배고팠다.오늘도 하루를 힘차게 살아야지 아자아자아자자 파이팅팅팅",
+                                    memo,
                                     style: TextStyle(
                                         fontSize: 12, color: Colors.black),
                                   ),
@@ -319,6 +342,8 @@ class _P_FoodState extends State<P_Food> {
   }
 
   void _addFoodBottomSheet() {
+    now = DateTime.now();
+    formattedDate = DateFormat('yyyy-MM-dd').format(now);
     if (file == null) {
       print('_image is null');
     } else
@@ -388,7 +413,7 @@ class _P_FoodState extends State<P_Food> {
                                       padding:
                                           EdgeInsets.fromLTRB(0, 13, 20, 0),
                                       child: Text(
-                                        "date",
+                                        "${formattedDate}",
                                         style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.bold,
@@ -435,16 +460,17 @@ class _P_FoodState extends State<P_Food> {
                                     padding: EdgeInsets.all(8),
                                     child: TextButton(
                                       child: Text('등록하기'),
-                                      onPressed: () async{
+                                      onPressed: () async {
                                         await uploadImageToStorage();
-                                        AuthController authController =
-                                            AuthController.instance;
-                                        User? currentUser =
-                                            authController.getUser.value;
                                         menuText = _MenuController.text;
                                         desText = _DesController.text;
-                                        createDietDocument(currentUser!.uid,
-                                            imageUrl, menuText!, desText!);
+                                        traineeController.createDietDocument(
+                                            currentUser!.uid,
+                                            imageUrl,
+                                            menuText!,
+                                            desText!,
+                                            now,
+                                            formattedDate);
                                         menuText = '';
                                         desText = '';
                                         imageUrl = '';
@@ -489,28 +515,33 @@ class _P_FoodState extends State<P_Food> {
     });
   }
 
-  void createDietDocument(
-      String userUid, String foodImage, String menu, String memo) async {
-    try {
-      // Get a reference to the user's document in the "users" collection
-      DocumentReference userRef =
-          FirebaseFirestore.instance.collection('trainee').doc(userUid);
+  // Future<void> createDietDocument(String userUid, String foodImage, String menu,
+  //     String memo, DateTime date) async {
+  //   try {
+  //     // Get a reference to the user's document in the "users" collection
+  //     DocumentReference userRef =
+  //         FirebaseFirestore.instance.collection('trainee').doc(userUid);
 
-      // Create a reference to the "diet" subcollection under the user's document
-      CollectionReference dietCollectionRef = userRef.collection('Food');
+  //     // Create a reference to the "diet" subcollection under the user's document
+  //     CollectionReference dietCollectionRef = userRef.collection('Food');
 
-      // Create a new document in the "diet" subcollection with an automatically generated ID
-      DocumentReference dietDocRef = dietCollectionRef.doc(uniqueFileName);
-      await dietDocRef.set({
-        'foodImage': foodImage,
-        'menu': menu,
-        'memo': memo,
-        // Add other diet fields as needed
-      });
+  //     QuerySnapshot existingDocuments = await dietCollectionRef.get();
+  //     int documentNumber = existingDocuments.size + 1;
+  //     String mappingName = 'number$documentNumber';
+  //     // Create a new document in the "diet" subcollection with an automatically generated ID
+  //     DocumentReference dietDocRef = dietCollectionRef.doc(formattedDate);
 
-      print('Successfully created diet document with ID: ${dietDocRef.id}');
-    } catch (e) {
-      print('Error creating diet document: $e');
-    }
-  }
+  //     await dietDocRef.set({
+  //       'foodImage': foodImage,
+  //       'menu': menu,
+  //       'memo': memo,
+  //       'timestamp': date,
+  //       // Add other diet fields as needed
+  //     });
+
+  //     print('Successfully created diet document with ID: ${dietDocRef.id}');
+  //   } catch (e) {
+  //     print('Error creating diet document: $e');
+  //   }
+  // }
 }

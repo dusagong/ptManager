@@ -21,7 +21,7 @@ class AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
   FirebaseAuth authentication = FirebaseAuth.instance;
-  bool initialized = true;
+  bool initialized = false;
   late bool isTrainer;
 
   Rx<Reaction> _reaction = Reaction.none.obs;
