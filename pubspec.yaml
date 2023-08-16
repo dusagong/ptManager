@@ -53,6 +53,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   flutter_time_picker_spinner: ^2.0.0
   flutter_material_pickers: ^3.6.0
+  shared_preferences: ^2.2.0
   
 dev_dependencies:
   flutter_test:

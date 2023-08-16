@@ -38,8 +38,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 selectedDecoration : BoxDecoration(
                   color: Color(0xFF18F005),
                   shape: BoxShape.circle,
-                )
-                ,
+                ),
               ),
               headerStyle: HeaderStyle(
                   formatButtonVisible: false,

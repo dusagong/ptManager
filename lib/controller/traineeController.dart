@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TraineeController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -47,4 +48,108 @@ class TraineeController extends GetxController {
       return false;
     }
   }
+  ////////////////////////
+  // int latestMappingNumber = 0;
+  // void onInit() {
+  //   super.onInit();
+  //   _loadLatestMappingNumber();
+  // }
+
+  // Future<void> _loadLatestMappingNumber() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   latestMappingNumber = prefs.getInt('latestMappingNumber') ?? 0;
+  // }
+
+  Future<void> createDietDocument(String userUid, String foodImage, String menu,
+      String memo, DateTime date, String formattedDate) async {
+    try {
+      // Get a reference to the user's document in the "trainee" collection
+      DocumentReference userRef =
+          FirebaseFirestore.instance.collection('trainee').doc(userUid);
+
+      // Get the user's "Food" document
+      DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
+          await userRef.collection('Food').doc(formattedDate).get();
+      Map<String, dynamic> foodData = foodDocSnapshot.data() ?? {};
+
+      // Get the existing mappings or initialize an empty map if it doesn't exist
+      Map<String, dynamic> mappings = foodData['mappings'] ?? {};
+
+      // Generate a new mapping name (e.g., number1, number2, ...)
+      int mappingNumber = (foodData['latestMappingNumber'] ?? 0) + 1;
+
+      // Generate a new mapping name (e.g., number1, number2, ...)
+      String mappingName = 'number$mappingNumber';
+
+      // Create a new mapping with the specified data
+      Map<String, dynamic> newMapping = {
+        'foodImage': foodImage,
+        'menu': menu,
+        'memo': memo,
+        'timestamp': date,
+      };
+
+      // Add the new mapping to the mappings map
+      mappings[mappingName] = newMapping;
+
+      // Update the mappings field in the "Food" document
+      foodData['mappings'] = mappings;
+
+      foodData['latestMappingNumber'] = mappingNumber;
+
+      // Update the "Food" document with the new mappings
+      await userRef.collection('Food').doc(formattedDate).set(foodData);
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setInt('latestMappingNumber', latestMappingNumber);
+
+      print('Successfully added mapping: $mappingName');
+    } catch (e) {
+      print('Error creating diet mapping: $e');
+    }
+  }
+
+  // Future<void> deleteMapping(
+  //   String userUid,
+  //   String formattedDate,
+  //   String mappingName,
+  // ) async {
+  //   try {
+  //     // Get a reference to the user's document in the "trainee" collection
+  //     DocumentReference userRef =
+  //         FirebaseFirestore.instance.collection('trainee').doc(userUid);
+
+  //     // Get the user's "Food" document
+  //     DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
+  //         await userRef.collection('Food').doc(formattedDate).get();
+  //     Map<String, dynamic> foodData = foodDocSnapshot.data() ?? {};
+
+  //     // Get the existing mappings or initialize an empty map if it doesn't exist
+  //     Map<String, dynamic> mappings = foodData['mappings'] ?? {};
+
+  //     // Remove the mapping to be deleted
+  //     mappings.remove(mappingName);
+
+  //     // Re-number the remaining mappings to ensure continuous numbering
+  //     int newMappingNumber = 1;
+  //     Map<String, dynamic> renumberedMappings = {};
+  //     for (var oldMappingName in mappings.keys) {
+  //       renumberedMappings['number$newMappingNumber'] =
+  //           mappings[oldMappingName];
+  //       newMappingNumber++;
+  //     }
+
+  //     // Update the mappings field in the "Food" document
+  //     foodData['mappings'] = renumberedMappings;
+
+  //     // Update the latest mapping number in the document
+  //     foodData['latestMappingNumber'] = newMappingNumber - 1;
+
+  //     // Update the "Food" document with the updated mappings and latest mapping number
+  //     await userRef.collection('Food').doc(formattedDate).set(foodData);
+
+  //     print('Successfully deleted mapping: $mappingName');
+  //   } catch (e) {
+  //     print('Error deleting diet mapping: $e');
+  //   }
+  // }
 }
