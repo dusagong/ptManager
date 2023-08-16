@@ -64,39 +64,6 @@ class _P_FoodState extends State<P_Food> {
   String? menuText;
   String? desText;
 
-  List<Map<String, dynamic>> foodData = [
-    {
-      "date": "7월 19일",
-      "images": [
-        "assets/food/KakaoTalk_20230713_013044286_01.jpg",
-        "assets/food/KakaoTalk_20230713_013044286_02.jpg",
-        "assets/food/KakaoTalk_20230713_013044286_03.jpg",
-      ],
-    },
-    {
-      "date": "7월 18일",
-      "images": [
-        "assets/food/KakaoTalk_20230713_013044286_04.jpg",
-        "assets/food/KakaoTalk_20230713_013044286_05.jpg",
-        "assets/food/KakaoTalk_20230713_013044286_06.jpg",
-      ],
-    },
-    {
-      "date": "7월 17일",
-      "images": [
-        "assets/food/KakaoTalk_20230713_013044286_07.jpg",
-        "assets/food/KakaoTalk_20230713_013044286_08.jpg",
-      ],
-    },
-    {
-      "date": "7월 16일",
-      "images": [
-        "assets/food/KakaoTalk_20230713_013044286_09.jpg",
-        "assets/food/KakaoTalk_20230713_013044286_10.jpg",
-      ],
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,11 +134,14 @@ class _P_FoodState extends State<P_Food> {
                                   0,
                           itemBuilder: (context, imgIndex) {
                             String mappingName = 'number${imgIndex + 1}';
-                            Map<String, dynamic> mappingData = (foodData[
-                                        'mappings']
-                                    as Map<String, dynamic>?)?[mappingName] ??
-                                {};
-
+                            Map<String, dynamic>? mappingData =
+                                (foodData['mappings']
+                                        as Map<String, dynamic>?)?[mappingName]
+                                    as Map<String, dynamic>?;
+                            if (mappingData == null) {
+                              // Handle the case where mappingData is missing for the current mappingName
+                              return SizedBox(); // Return an empty container or handle it accordingly
+                            }
                             return GestureDetector(
                               onTap: () {
                                 _showBottomSheet(
@@ -211,7 +181,8 @@ class _P_FoodState extends State<P_Food> {
         );
   }
 
-  void _showBottomSheet(BuildContext context, String imageUrl, String date, String menu, String memo) {
+  void _showBottomSheet(BuildContext context, String imageUrl, String date,
+      String menu, String memo) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,

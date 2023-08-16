@@ -88,7 +88,7 @@ class _T_PersonalPageState extends State<T_PersonalPage> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          Tab(child: T_PersonalFood(),),
+                          Tab(child: T_PersonalFood(widget.documentName),),
                           Tab(child: T_PersonalChange(),),
                           SingleChildScrollView(
                             child: Center(child: Text("캘린더 페이지")),
