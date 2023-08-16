@@ -51,6 +51,8 @@ dependencies:
   flutter_native_splash: ^2.3.1
   flutter_reaction_button: ^2.0.1+2
   flutter_staggered_animations: ^1.1.1
+  flutter_time_picker_spinner: ^2.0.0
+  flutter_material_pickers: ^3.6.0
   
 dev_dependencies:
   flutter_test:
@@ -118,3 +120,4 @@ flutter:
     - assets/onboarding/
     - assets/food/
     - assets/imoge/
+    - assets/trainer/addSchedulerimoge/

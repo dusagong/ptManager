@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:pt_manager/screens/trainer/t_addschedule.dart';
+import 'package:pt_manager/screens/trainer/t_personalPage.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -14,7 +18,6 @@ class T_Home extends StatefulWidget {
 
 class _T_HomeState extends State<T_Home> {
 
-  late CalendarController _calendarController;
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -252,7 +255,8 @@ class _T_HomeState extends State<T_Home> {
         backgroundColor: Color(0xFFE1E1E1),
         shape: CircleBorder(),
         onPressed: () {
-          _showAddEventDialog(_selectedDay!);
+          //_showAddEventDialog(_selectedDay!);
+          Get.to(() => T_AddSchedule());
         },
         child: Icon(Icons.add,color: Colors.black,),
       ),
