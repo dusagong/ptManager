@@ -3,6 +3,7 @@ import 'package:pt_manager/screens/trainer/t_home.dart';
 import 'package:pt_manager/screens/trainer/t_pList.dart';
 
 import '../screens/trainer/t_home.dart';
+import '../screens/trainer/t_memo.dart';
 
 
 class T_BottomNavi extends StatefulWidget {
@@ -18,7 +19,7 @@ class T_BottomNaviState extends State<T_BottomNavi> {
   final List<Widget> _widgetOptions = <Widget>[
     T_Home(),
     T_Plist(),
-    T_Plist(),
+    T_Memo(),
   ];
 
   void _onItemTapped(int index) {
@@ -34,7 +35,7 @@ class T_BottomNaviState extends State<T_BottomNavi> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.text_snippet),
+            icon: Icon(Icons.home_outlined),
             label: '홈',
           ),
           BottomNavigationBarItem(
@@ -42,8 +43,8 @@ class T_BottomNaviState extends State<T_BottomNavi> {
             label: '회원',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: '식단',
+            icon: Icon(Icons.create_sharp),
+            label: '메모',
           ),
         ],
         currentIndex: _selectedIndex,

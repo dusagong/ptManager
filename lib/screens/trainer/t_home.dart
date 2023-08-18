@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pt_manager/screens/trainer/t_addschedule.dart';
+import 'package:pt_manager/screens/trainer/t_mypage.dart';
 import 'package:pt_manager/screens/trainer/t_personalPage.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -107,7 +108,7 @@ class _T_HomeState extends State<T_Home> {
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,10 +117,10 @@ class _T_HomeState extends State<T_Home> {
                     Text('오늘도 최선을 다 해보자구요~'),
                   ],
                 ),
-                SizedBox(
-                  width: 20,
-                ),
-                Image.asset('assets/person.png')
+                GestureDetector(
+                  onTap: (){Get.to(() => T_MyPage());},
+                  child: Image.asset('assets/person.png'),
+                )
               ],
             ),
             TableCalendar(
