@@ -197,20 +197,17 @@ class _T_AddScheduleState extends State<T_AddSchedule> {
                                             });
                                           },
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: isSelected ? Colors.white : Colors.transparent,
-                                                width: isSelected ? 2.0 : 0.0,
-                                              ),
-                                            ),
                                             child: Column(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Column(
                                                   children: [
-                                                    CircleAvatar(
-                                                      radius: 25,
-                                                      backgroundImage: AssetImage('assets/trainer/profile.jpg'),
+                                                    Opacity(
+                                                      opacity: isSelected ? 1 : 0.1,
+                                                      child:CircleAvatar(
+                                                        radius: 25,
+                                                        backgroundImage: AssetImage('assets/trainer/profile.jpg'),
+                                                      ),
                                                     ),
                                                     Text(
                                                       // documentName!,
@@ -246,12 +243,48 @@ class _T_AddScheduleState extends State<T_AddSchedule> {
                       Text("운동 내용",style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,color: Colors.white),)
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "입력",
+                      filled: true,
+                      fillColor: Color(0xFF292929),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent, width: 0.1),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: Material(
+        color: Color(0xFF1D5F18),
+        child: InkWell(
+          onTap: (){},
+          child: SizedBox(
+            height: kToolbarHeight,
+            width: double.infinity,
+            child: Center(
+              child: Text(
+                "추가하기",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w200
+                ),
+              ),
+            ),
+          ),
+        ),
       )
+      ,
     );
   }
   Widget hourMinuteInterval(){

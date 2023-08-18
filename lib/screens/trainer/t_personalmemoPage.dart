@@ -1,7 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:pt_manager/screens/trainer/t_addmemo.dart';
 import 'package:pt_manager/screens/trainer/t_note_card.dart';
+import 'package:pt_manager/screens/trainer/t_shownote.dart';
 
 class T_PersonalMemo extends StatefulWidget {
   final String documentName;
@@ -73,29 +77,34 @@ class _T_PersonalMemoState extends State<T_PersonalMemo> {
                           itemCount: snapshot.data?.docs.length,
                           itemBuilder: (context, index){
                             final doc = snapshot.data?.docs[index];
-                            return Container(
-                              // height: 60,
-                              decoration: BoxDecoration(
-                                color: Colors.black
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(15, 15, 0, 0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(doc!["title"],style: TextStyle(fontSize: 17,color: Colors.white),),
-                                        Text(doc!["content"],style: TextStyle(fontSize: 12,color: Color(0xFF8B8B8B))),
-                                        Divider(
-                                          endIndent: 15,
-                                        )
-                                      ],
-                                    ),
+                            return GestureDetector(
+                              onTap: (){Get.to(() => T_ShowNote(title: doc!["title"], content: doc!["content"]));},
+                              child: Container(
+                                // height: 60,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xFF292929)
                                   ),
-                                ],
-                              )
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(15, 12, 0, 12),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(doc!["title"],overflow: TextOverflow.ellipsis, maxLines: 1,style: TextStyle(fontSize: 17,color: Colors.white),),
+                                            Text(doc!["content"],overflow: TextOverflow.ellipsis, maxLines: 3,style: TextStyle(fontSize: 12,color: Color(0xFF8B8B8B))),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        indent: 15,
+                                        endIndent: 15,
+                                        thickness: 2,
+                                      )
+                                    ],
+                                  )
+                              ),
                             );
                           }
                         );
@@ -134,7 +143,9 @@ class _T_PersonalMemoState extends State<T_PersonalMemo> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFFE1E1E1),
         shape: CircleBorder(),
-        onPressed: () {_isAddingMemo = true;},
+        onPressed: () {
+          Get.to(() => T_AddMemo());
+          },
         child: Icon(Icons.add,color: Colors.black,),
       ),
     );

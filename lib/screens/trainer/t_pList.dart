@@ -53,7 +53,6 @@ class _T_PlistState extends State<T_Plist> {
             return Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
-                height: 400,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.transparent),
                 ),
