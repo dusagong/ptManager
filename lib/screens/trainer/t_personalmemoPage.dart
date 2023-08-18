@@ -7,6 +7,19 @@ import 'package:pt_manager/screens/trainer/t_addmemo.dart';
 import 'package:pt_manager/screens/trainer/t_note_card.dart';
 import 'package:pt_manager/screens/trainer/t_shownote.dart';
 
+
+/*
+6시 시작
+
+7시 50분까지 모이기
+
+8시 시작하기
+
+11시 30분 마치기 -> Go to Sea 음주음전 Let go
+
+야식으로 피자 3판 치킨 3마리
+* */
+
 class T_PersonalMemo extends StatefulWidget {
   final String documentName;
   const T_PersonalMemo(this.documentName, {Key? key}) : super(key: key);
