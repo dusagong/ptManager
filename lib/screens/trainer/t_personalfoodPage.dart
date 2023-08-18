@@ -47,6 +47,7 @@ class _T_PersonalFoodState extends State<T_PersonalFood> {
 
             return ListView.builder(
               itemCount: foodDocs.length,
+              // reverse: true,
               itemBuilder: (context, index) {
                 DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
                     foodDocs[index];

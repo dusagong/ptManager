@@ -90,9 +90,8 @@ class _P_FoodState extends State<P_Food> {
               .collection('trainee')
               .doc(currentUser?.uid)
               .collection('Food')
-              // .orderBy('date',
-              //     descending:
-              //         true) // Order documents by date in descending order
+              // .orderBy(FieldPath.documentId,
+              //     descending: true) // Order by document ID in descending order
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
@@ -109,6 +108,7 @@ class _P_FoodState extends State<P_Food> {
 
             return ListView.builder(
               itemCount: foodDocs.length,
+              // reverse: true,
               itemBuilder: (context, index) {
                 DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
                     foodDocs[index];
