@@ -96,6 +96,7 @@ class TraineeController extends GetxController {
       foodData['mappings'] = mappings;
 
       foodData['latestMappingNumber'] = mappingNumber;
+      foodData['date'] = date;
 
       // Update the "Food" document with the new mappings
       await userRef.collection('Food').doc(formattedDate).set(foodData);

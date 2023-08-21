@@ -90,8 +90,7 @@ class _P_FoodState extends State<P_Food> {
               .collection('trainee')
               .doc(currentUser?.uid)
               .collection('Food')
-              // .orderBy(FieldPath.documentId,
-              //     descending: true) // Order by document ID in descending order
+              .orderBy("date",descending: true) // Order by document ID in descending order
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {

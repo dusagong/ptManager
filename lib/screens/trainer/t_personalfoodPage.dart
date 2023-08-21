@@ -1,4 +1,4 @@
-import  'package:chat_bubbles/bubbles/bubble_special_two.dart';
+import 'package:chat_bubbles/bubbles/bubble_special_two.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:pt_manager/controller/traineeController.dart';
 
 class T_PersonalFood extends StatefulWidget {
   final String documentName;
-  const T_PersonalFood(this.documentName,{Key? key}) : super(key: key);
+  const T_PersonalFood(this.documentName, {Key? key}) : super(key: key);
 
   @override
   State<T_PersonalFood> createState() => _T_PersonalFoodState();
@@ -18,103 +18,98 @@ class T_PersonalFood extends StatefulWidget {
 
 class _T_PersonalFoodState extends State<T_PersonalFood> {
   final TraineeController traineeController = Get.put(TraineeController());
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('trainee')
-              .doc(widget.documentName)
-              .collection('Food')
-              // .orderBy('date',
-              //     descending:
-              //         true) // Order documents by date in descending order
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            }
+      stream: FirebaseFirestore.instance
+          .collection('trainee')
+          .doc(widget.documentName)
+          .collection('Food')
+          .orderBy("date", descending: true)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        }
 
-            if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
-            }
+        if (!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
 
-            List<QueryDocumentSnapshot<Map<String, dynamic>>> foodDocs =
-                snapshot.data!.docs
-                    as List<QueryDocumentSnapshot<Map<String, dynamic>>>;
+        List<QueryDocumentSnapshot<Map<String, dynamic>>> foodDocs = snapshot
+            .data!.docs as List<QueryDocumentSnapshot<Map<String, dynamic>>>;
 
-            return ListView.builder(
-              itemCount: foodDocs.length,
-              // reverse: true,
-              itemBuilder: (context, index) {
-                DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
-                    foodDocs[index];
-                Map<String, dynamic> foodData = foodDocSnapshot.data() ?? {};
+        return ListView.builder(
+          itemCount: foodDocs.length,
+          // reverse: true,
+          itemBuilder: (context, index) {
+            DocumentSnapshot<Map<String, dynamic>> foodDocSnapshot =
+                foodDocs[index];
+            Map<String, dynamic> foodData = foodDocSnapshot.data() ?? {};
 
-                return Column(
-                  children: [
-                    ListTile(
-                      title: Text(
-                        foodDocSnapshot.id, // Date as the document ID
-                        style: TextStyle(fontSize: 13),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                      child: SizedBox(
-                        height: 120,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount:
-                              (foodData['mappings'] as Map<String, dynamic>?)
-                                      ?.length ??
-                                  0,
-                          itemBuilder: (context, imgIndex) {
-                            String mappingName = 'number${imgIndex + 1}';
-                            Map<String, dynamic>? mappingData =
-                                (foodData['mappings']
-                                        as Map<String, dynamic>?)?[mappingName]
-                                    as Map<String, dynamic>?;
-                            if (mappingData == null) {
-                              // Handle the case where mappingData is missing for the current mappingName
-                              return SizedBox(); // Return an empty container or handle it accordingly
-                            }
-                            return GestureDetector(
-                              onTap: () {
-                                _showBottomSheet(
-                                  context,
-                                  mappingData['foodImage'],
-                                  foodDocSnapshot.id,
-                                  mappingData['menu'],
-                                  mappingData['memo'],
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5),
-                                  child: Image.network(
-                                    // foodData[index]["images"][imgIndex],
-                                    mappingData['foodImage'],
-                                    width: 120,
-                                    height: 120,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    foodDocSnapshot.id, // Date as the document ID
+                    style: TextStyle(fontSize: 13),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: SizedBox(
+                    height: 120,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: (foodData['mappings'] as Map<String, dynamic>?)
+                              ?.length ??
+                          0,
+                      itemBuilder: (context, imgIndex) {
+                        String mappingName = 'number${imgIndex + 1}';
+                        Map<String, dynamic>? mappingData =
+                            (foodData['mappings']
+                                    as Map<String, dynamic>?)?[mappingName]
+                                as Map<String, dynamic>?;
+                        if (mappingData == null) {
+                          // Handle the case where mappingData is missing for the current mappingName
+                          return SizedBox(); // Return an empty container or handle it accordingly
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            _showBottomSheet(
+                              context,
+                              mappingData['foodImage'],
+                              foodDocSnapshot.id,
+                              mappingData['menu'],
+                              mappingData['memo'],
                             );
                           },
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network(
+                                // foodData[index]["images"][imgIndex],
+                                mappingData['foodImage'],
+                                width: 120,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                )
+              ],
             );
           },
-        )
+        );
+      },
+    )
 
         //
         );
@@ -182,7 +177,6 @@ class _T_PersonalFoodState extends State<T_PersonalFood> {
                                             color: Colors.black),
                                       ),
                                     ),
-                                    
                                   ],
                                 ),
                                 Padding(
@@ -245,8 +239,4 @@ class _T_PersonalFoodState extends State<T_PersonalFood> {
       },
     );
   }
-
 }
-
-
-
