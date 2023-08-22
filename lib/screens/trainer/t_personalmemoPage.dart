@@ -59,6 +59,9 @@ class _T_PersonalMemoState extends State<T_PersonalMemo> {
                 StreamBuilder<QuerySnapshot>(
                   stream: traineeDocumentRef
                       .collection("memo")
+                      .orderBy("date",
+                          descending:
+                              true) // Order by document ID in descending order
                       .snapshots(), // memo 컬렉션의 스트림을 가져옴
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {

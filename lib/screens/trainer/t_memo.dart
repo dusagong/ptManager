@@ -145,6 +145,9 @@ class _T_MemoState extends State<T_Memo> {
                   child: StreamBuilder<QuerySnapshot>(
                     stream: traineeDocumentRef
                         .collection("memo")
+                        .orderBy("date",
+                            descending:
+                                true) // Order by document ID in descending order
                         .snapshots(), // memo 컬렉션의 스트림을 가져옴
                     builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (selectedTraineeIndex == -1) {
@@ -164,7 +167,7 @@ class _T_MemoState extends State<T_Memo> {
                               return GestureDetector(
                                 onTap: () {
                                   Get.to(() => T_ShowNote(
-                                    traineeDocumentRef.id,doc.id,
+                                      traineeDocumentRef.id, doc.id,
                                       title: doc["title"],
                                       content: doc["content"]));
                                 },
