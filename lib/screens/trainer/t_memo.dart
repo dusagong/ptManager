@@ -22,7 +22,7 @@ class _T_MemoState extends State<T_Memo> {
   late Future<List<DocumentSnapshot<Map<String, dynamic>>>> traineeDocuments;
   final TraineeController traineeController = Get.put(TraineeController());
   int selectedMemoIndex = -1; // 선택된 메모 인덱스를 추적하기 위해 추가
-
+  late String? documentName;
   @override
   void initState() {
     super.initState();
@@ -76,9 +76,9 @@ class _T_MemoState extends State<T_Memo> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               var traineeData = snapshot.data?[index].data();
-                              var documentName = snapshot.data?[index].id;
+                              documentName = snapshot.data?[index].id;
                               bool isSelected = (index == selectedTraineeIndex);
-
+                              // print("Selected Document Name: $documentName");
                               return Padding(
                                 padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
                                 child: GestureDetector(
@@ -86,14 +86,19 @@ class _T_MemoState extends State<T_Memo> {
                                     setState(() {
                                       selectedTraineeIndex =
                                           isSelected ? -1 : index;
+                                      // documentName = snapshot.data?[index].id;
                                       selectedMemoIndex = -1;
-                                      if (selectedTraineeIndex != -1) {
-                                        traineeDocumentRef = FirebaseFirestore
-                                            .instance
-                                            .collection("trainee")
-                                            .doc(documentName);
-                                      }
                                     });
+                                    if (selectedTraineeIndex != -1) {
+                                      documentName = snapshot
+                                          .data?[selectedTraineeIndex].id;
+                                      print(
+                                          "Selected Document Name: $documentName");
+                                      traineeDocumentRef = FirebaseFirestore
+                                          .instance
+                                          .collection("trainee")
+                                          .doc(documentName);
+                                    }
                                   },
                                   child: Container(
                                     child: Column(
@@ -159,6 +164,7 @@ class _T_MemoState extends State<T_Memo> {
                               return GestureDetector(
                                 onTap: () {
                                   Get.to(() => T_ShowNote(
+                                    traineeDocumentRef.id,doc.id,
                                       title: doc["title"],
                                       content: doc["content"]));
                                 },
@@ -209,7 +215,7 @@ class _T_MemoState extends State<T_Memo> {
                       return Text("Write first memo!");
                     },
                   ),
-                )
+                ),
               ],
             )
           ],
@@ -220,7 +226,9 @@ class _T_MemoState extends State<T_Memo> {
               backgroundColor: Color(0xFFE1E1E1),
               shape: CircleBorder(),
               onPressed: () {
-                Get.to(() => T_AddMemo());
+                if (documentName != null) {
+                  Get.to(() => T_AddMemo(traineeDocumentRef.id));
+                }
               },
               child: Icon(
                 Icons.add,

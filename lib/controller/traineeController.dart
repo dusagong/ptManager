@@ -108,6 +108,57 @@ class TraineeController extends GetxController {
       print('Error creating diet mapping: $e');
     }
   }
+  Future<void> createTraineeMemo(String userDocumentName, String title, String text) async {
+  try {
+    // Get a reference to the user's document in the "trainee" collection using the provided document name
+    DocumentReference userRef = FirebaseFirestore.instance.collection('trainee').doc(userDocumentName);
+
+    // Get the current timestamp
+    DateTime currentTime = DateTime.now();
+
+    // Create a new memo with the specified data
+    Map<String, dynamic> newMemo = {
+      'title': title,
+      'content': text,
+      'date': currentTime,
+    };
+
+    // Add the new memo as a document under the "memo" collection
+    await userRef.collection('memo').add(newMemo);
+
+    print('Successfully added memo: $title');
+  } catch (e) {
+    print('Error creating trainee memo: $e');
+  }
+}
+
+Future<void> updateTraineeMemo(String userDocumentName, String memoDocumentId, String newTitle, String newText) async {
+  try {
+    // Get a reference to the user's document in the "trainee" collection using the provided document name
+    DocumentReference userRef = FirebaseFirestore.instance.collection('trainee').doc(userDocumentName);
+
+    // Get the reference to the memo document within the "memo" collection
+    DocumentReference memoRef = userRef.collection('memo').doc(memoDocumentId);
+
+    // Get the current timestamp
+    DateTime currentTime = DateTime.now();
+
+    // Create updated memo data
+    Map<String, dynamic> updatedMemo = {
+      'title': newTitle,
+      'content': newText,
+      'date': currentTime,
+    };
+
+    // Update the memo with the new data
+    await memoRef.update(updatedMemo);
+
+    print('Successfully updated memo: $newTitle');
+  } catch (e) {
+    print('Error updating trainee memo: $e');
+  }
+}
+
 
   // Future<void> deleteMapping(
   //   String userUid,
