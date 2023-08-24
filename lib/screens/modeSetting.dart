@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
@@ -24,24 +25,24 @@ class _ModeSetState extends State<ModeSet> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 75,
+            height: 75.h,
           ),
           Text(
             '단계 1/2',
             style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 60,
+            height: 60.h,
           ),
           Text(
             '역할이 무엇인가요?',
             style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 60,
+            height: 60.h,
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -64,14 +65,14 @@ class _ModeSetState extends State<ModeSet> {
                                 ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10.h,
                           ),
                           Container(
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 255, 255, 255),
                               border: Border.all(
                                 color: Theme.of(context).colorScheme.primary,
-                                width: 4,
+                                width: 4.w,
                               ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -80,10 +81,10 @@ class _ModeSetState extends State<ModeSet> {
                               //   // fit: BoxFit.fitHeight,
                               // ),
                             ),
-                            height: 245,
-                            width: 175,
+                            height: 245.h,
+                            width: 175.w,
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 30.h),
                           // Image.asset('asset/클릭된거.png')
                         ],
                       )
@@ -102,7 +103,7 @@ class _ModeSetState extends State<ModeSet> {
                                 ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10.h,
                           ),
                           GestureDetector(
                             onTap: () {
@@ -120,11 +121,11 @@ class _ModeSetState extends State<ModeSet> {
                                 //   // fit: BoxFit.fitHeight,
                                 // ),
                               ),
-                              height: 245,
-                              width: 175,
+                              height: 245.h,
+                              width: 175.w,
                             ),
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 30.h),
                           // Image.asset('asset/클릭안된거.png')
                         ],
                       ),
@@ -143,7 +144,7 @@ class _ModeSetState extends State<ModeSet> {
                                 fontSize: 16,),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10.h,
                           ),
                           GestureDetector(
                             child: Container(
@@ -156,8 +157,8 @@ class _ModeSetState extends State<ModeSet> {
                                 //   // fit: BoxFit.fitHeight,
                                 // ),
                               ),
-                              height: 245,
-                              width: 175,
+                              height: 245.h,
+                              width: 175.w,
                             ),
                             onTap: () {
                               setState(() {
@@ -165,7 +166,7 @@ class _ModeSetState extends State<ModeSet> {
                               });
                             },
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 30.h),
                           // Image.asset('asset/클릭안된거.png')
                         ],
                       )
@@ -183,14 +184,14 @@ class _ModeSetState extends State<ModeSet> {
                                 fontSize: 16),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10.h,
                           ),
                           Container(
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 255, 255, 255),
                               border: Border.all(
                                 color: Theme.of(context).colorScheme.primary,
-                                width: 4,
+                                width: 4.w,
                               ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
@@ -199,10 +200,10 @@ class _ModeSetState extends State<ModeSet> {
                               //   // fit: BoxFit.fitHeight,
                               // ),
                             ),
-                            height: 245,
-                            width: 175,
+                            height: 245.h,
+                            width: 175.w,
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 30.h),
                           // Image.asset('asset/클릭된거.png')
                         ],
                       )
@@ -210,7 +211,7 @@ class _ModeSetState extends State<ModeSet> {
             ),
           ),
           SizedBox(
-            height: 85,
+            height: 85.h,
           ),
           GestureDetector(
             child: Container(
@@ -226,13 +227,13 @@ class _ModeSetState extends State<ModeSet> {
                     ),
                   ],
                 ),
-                width: 357,
-                height: 60,
+                width: 357.w,
+                height: 60.h,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 14,
+                      height: 14.h,
                     ),
                     Text('다음 단계로 넘어가요',
                         style: TextStyle(

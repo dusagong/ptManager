@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pt_manager/controller/auth_controller.dart';
 import 'package:pt_manager/screens/logIn.dart';
@@ -21,15 +22,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'hierarchy',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: darkColorScheme,
-        useMaterial3: true,
-      ),
-      home: ModeSet(),
-      // home: P_BottomNavi(), 
+    //ScreenUtil.init(context, designSize: const Size(360, 690));
+    return ScreenUtilInit(
+      designSize: Size(390, 984),
+      builder: (_,child){
+        return GetMaterialApp(
+          title: 'hierarchy',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: darkColorScheme,
+            useMaterial3: true,
+          ),
+          home: ModeSet(),
+        );
+      }
     );
   }
 }
+
+
+/*screen util 사용하기, 근데 시발 왜 자꾸 하란대로 했는데 에러 떠 시발 짜증나게*/

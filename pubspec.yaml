@@ -38,7 +38,7 @@ dependencies:
   get: ^4.6.5
   carousel_slider: ^4.2.1
   table_calendar: ^3.0.9
-  flutter_screenutil: ^5.8.4
+  flutter_screenutil: ^5.9.0
   syncfusion_flutter_calendar: ^22.1.37
   cloud_firestore: ^4.8.2
   firebase_core: ^2.14.0
