@@ -67,3 +67,8 @@ const darkColorScheme = ColorScheme(
   outlineVariant: Color(0xFF424940),
   scrim: Color(0xFF000000),
 );
+
+/*
+* Dark theme 과 Light Theme을 나눌 것인가?
+* Theme builder로 지정한 Key Color와 우리의 design system Key Color와 다르다 -> 일일히 우리가 지정해야 한다.
+* */

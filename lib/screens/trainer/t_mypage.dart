@@ -18,7 +18,8 @@ class _T_MyPageState extends State<T_MyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  PreferredSize(
-        preferredSize: Size.fromHeight(isSettingsOpen ? 170 : kToolbarHeight),
+        preferredSize: Size.fromHeight(isSettingsOpen
+            ? 170 : kToolbarHeight),
         child: AppBar(
           title: Text(isSettingsOpen ? "홈 편집" : "마이페이지", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)), // 타이틀을 null로 설정하여 빈 공간을 만듦
           leading: IconButton(
