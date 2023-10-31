@@ -12,7 +12,7 @@ import 'package:pt_manager/widgets/p_bottomNavigation.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp().then((value) => Get.put(AuthController()));
+  // await Firebase.initializeApp().then((value) => Get.put(AuthController()));
   runApp(const MyApp());
 }
 
@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: ModeSet(),
+          // home: ModeSet(),
         );
       }
     );
