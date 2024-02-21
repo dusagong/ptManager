@@ -41,5 +41,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-/*screen util 사용하기, 근데 시발 왜 자꾸 하란대로 했는데 에러 떠 시발 짜증나게*/
